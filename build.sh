@@ -1,7 +1,7 @@
 yazi_VERSION=$1
 BUILD_VERSION=$2
 declare -a arr=("bookworm" "trixie" "sid")
-j for i in "${arr[@]}"
+for i in "${arr[@]}"
 do
   DEBIAN_DIST=$i
   FULL_VERSION=$yazi_VERSION-${BUILD_VERSION}+${DEBIAN_DIST}_amd64
