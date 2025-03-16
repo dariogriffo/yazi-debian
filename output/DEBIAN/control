@@ -1,0 +1,11 @@
+Source: yazi
+Section: utils
+Priority: optional
+Maintainer: Dario Griffo <dariogriffo@gmail.com>
+Homepage: https://github.com/sxyazi/yazi
+Package: yazi
+Version: yazi_VERSION-BUILD_VERSION+DIST
+Architecture: amd64
+Depends: 
+Description: a terminal file manager written in Rust, based on non-blocking async I/O
+
