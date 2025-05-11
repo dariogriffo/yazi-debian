@@ -19,7 +19,7 @@ RUN set -eux; \
 RUN mkdir -p /output/usr/bin
 RUN mkdir -p /output/usr/share/doc/yazi
 RUN git clone https://github.com/sxyazi/yazi.git
-RUN cd yazi && cargo build --release --all-features && cp ./target/release/yazi /output/usr/bin/
+RUN cd yazi && cargo build --release --all-features && cp ./target/release/yazi /output/usr/bin/ && cp ./target/release/ya /output/usr/bin/
 RUN mkdir -p /output/DEBIAN
 
 COPY output/DEBIAN/control /output/DEBIAN/
