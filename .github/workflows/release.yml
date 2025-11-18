@@ -3,7 +3,7 @@ name: Build yazi for Debian
 on:
   workflow_dispatch:
     inputs:
-      yazi_version:
+      YAZI_VERSION:
         description: The version of yazi to build.
         type: string
         required: true
@@ -11,6 +11,14 @@ on:
         description: The build version.
         type: string
         required: true
+      architecture:
+        description: Architecture to build (amd64, arm64, or 'all' for all architectures)
+        type: choice
+        default: 'all'
+        options:
+          - 'all'
+          - 'amd64'
+          - 'arm64'
 
 permissions:
   contents: write
@@ -18,14 +26,14 @@ permissions:
 jobs:
   build-yazi:
     name: Build
-    runs-on: ubuntu-latest    
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout yazi-debian
         uses: actions/checkout@v4
 
       - name: Build yazi
-        run: ./build.sh ${{ inputs.yazi_version }} ${{ inputs.build_version }}
-      
+        run: ./build.sh ${{ inputs.YAZI_VERSION }} ${{ inputs.build_version }} ${{ inputs.architecture }}
+
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
@@ -49,6 +57,6 @@ jobs:
         with:
           draft: true
           files: yazi_*.deb
-          name: ${{ inputs.yazi_version }}+${{ inputs.build_version }}
+          name: ${{ inputs.YAZI_VERSION }}+${{ inputs.build_version }}
           tag_name: ${{ env.RELEASE_TAG }}
           fail_on_unmatched_files: true
