@@ -101,7 +101,7 @@ if [ "$ARCH" = "all" ]; then
     echo ""
 
     # All supported architectures
-    ARCHITECTURES=("amd64" "arm64" "armhf" "armel" "i386")
+    ARCHITECTURES=("amd64" "arm64")
 
     for build_arch in "${ARCHITECTURES[@]}"; do
         echo "==========================================="
