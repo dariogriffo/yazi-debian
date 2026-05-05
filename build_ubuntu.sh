@@ -36,7 +36,7 @@ build_architecture() {
     mv yazi-${yazi_release}-unknown-linux-musl/ya "$yazi_release"
     mv yazi-${yazi_release}-unknown-linux-musl/LICENSE "$yazi_release"
 
-    declare -a arr=("jammy" "noble")
+    declare -a arr=("jammy" "noble" "questing" "resolute")
 
     for dist in "${arr[@]}"; do
         FULL_VERSION="$YAZI_VERSION-${BUILD_VERSION}+${dist}_${build_arch}_ubu"
