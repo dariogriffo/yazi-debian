@@ -39,27 +39,27 @@ build_architecture() {
     fi
 
     echo "Building for architecture: $build_arch using $yazi_release"
-    
-    rm -rf $yazi_release || true
-    rm -f "yazi-${build_arch}-unknown-linux-musl.zip" || true
-    
+
+    rm -rf $yazi-${yazi_release} || true
+    rm -f "yazi-${yazi_release}.zip" || true
+
     # Download and extract yazi binary for this architecture
         if ! wget "https://github.com/sxyazi/yazi/releases/download/v${YAZI_VERSION}/yazi-${yazi_release}-unknown-linux-musl.zip"; then
             echo "❌ Failed to download yazi binary for $build_arch"
             return 1
         fi
-    
+
         # Create directory and extract zip file
         mkdir -p "$yazi_release"
         if ! unzip "yazi-${yazi_release}-unknown-linux-musl.zip"; then
             echo "❌ Failed to extract yazi binary for $yazi_release"
             return 1
         fi
-        
+
         mv yazi-${yazi_release}-unknown-linux-musl/yazi "$yazi_release"
         mv yazi-${yazi_release}-unknown-linux-musl/ya "$yazi_release"
         mv yazi-${yazi_release}-unknown-linux-musl/LICENSE "$yazi_release"
-        
+
 
     # Build packages for all Debian distributions
     declare -a arr=("bookworm" "trixie" "forky" "sid")
@@ -125,5 +125,3 @@ else
         exit 1
     fi
 fi
-
-

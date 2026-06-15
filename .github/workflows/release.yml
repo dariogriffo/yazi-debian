@@ -41,22 +41,56 @@ jobs:
           path: yazi_*.deb
 
 
+  build-src:
+    name: Build Source Packages
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout yazi-debian
+        uses: actions/checkout@v4
+
+      - name: Install build dependencies
+        run: sudo apt-get update && sudo apt-get install -y --no-install-recommends dpkg-dev devscripts wget ca-certificates
+
+      - name: Build source packages
+        run: ./build_src.sh ${{ inputs.YAZI_VERSION }} ${{ inputs.build_version }}
+
+      - name: Upload source artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: source-artifact
+          path: |
+            yazi_*.dsc
+            yazi_*.orig.tar.gz
+            yazi_*.debian.tar.xz
+
+
   release-yazi:
     name: (Draft-)Release yazi for Debian
     if: github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
-    needs: build-yazi
+    needs:
+      - build-yazi
+      - build-src
     steps:
       - name: Download All Artifacts
         uses: actions/download-artifact@v4
         with:
           name: artifact
 
+      - name: Download Source Artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: source-artifact
+
       - name: Publish Release Draft
         uses: softprops/action-gh-release@v2
         with:
           draft: true
-          files: yazi_*.deb
+          files: |
+            yazi_*.deb
+            yazi_*.dsc
+            yazi_*.orig.tar.gz
+            yazi_*.debian.tar.xz
           name: ${{ inputs.YAZI_VERSION }}+${{ inputs.build_version }}
           tag_name: ${{ env.RELEASE_TAG }}
           fail_on_unmatched_files: true

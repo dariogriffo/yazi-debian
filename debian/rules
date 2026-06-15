@@ -1,0 +1,38 @@
+#!/usr/bin/make -f
+DEB_HOST_ARCH ?= $(shell dpkg-architecture -qDEB_HOST_ARCH)
+YAZI_VERSION := $(shell dpkg-parsechangelog -S Version | sed 's/[-~].*//')
+
+%:
+	dh $@
+
+override_dh_auto_configure:
+
+override_dh_auto_build:
+	@arch="$(DEB_HOST_ARCH)"; \
+	case "$$arch" in \
+		amd64) YAZI_RELEASE="yazi-x86_64-unknown-linux-musl" ;; \
+		arm64) YAZI_RELEASE="yazi-aarch64-unknown-linux-musl" ;; \
+		*) echo "Unsupported architecture: $$arch"; exit 1 ;; \
+	esac; \
+	echo "Downloading $$YAZI_RELEASE for $(YAZI_VERSION)..."; \
+	wget -q "https://github.com/sxyazi/yazi/releases/download/v$(YAZI_VERSION)/$$YAZI_RELEASE.zip"; \
+	unzip -q "$$YAZI_RELEASE.zip"; \
+	rm -f "$$YAZI_RELEASE.zip"; \
+	echo "$$YAZI_RELEASE" > .yazi_release_name
+
+override_dh_auto_install:
+	@YAZI_RELEASE=$$(cat .yazi_release_name); \
+	install -D -m 755 "$$YAZI_RELEASE/yazi" debian/yazi/usr/bin/yazi; \
+	install -D -m 755 "$$YAZI_RELEASE/ya"   debian/yazi/usr/bin/ya
+
+override_dh_auto_test:
+
+override_dh_auto_clean:
+	@if [ -f .yazi_release_name ]; then \
+		YAZI_RELEASE=$$(cat .yazi_release_name); \
+		rm -rf "$$YAZI_RELEASE" .yazi_release_name || true; \
+	fi
+
+override_dh_strip:
+
+override_dh_shlibdeps:
