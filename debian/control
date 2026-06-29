@@ -9,7 +9,7 @@ Rules-Requires-Root: no
 
 Package: yazi
 Architecture: amd64 arm64
-Depends: ${misc:Depends}
+Suggests: ${misc:Suggests}
 Description: Blazing fast terminal file manager written in Rust
  Yazi is a terminal file manager written in Rust, based on async I/O.
  It provides two binaries: yazi (the file manager) and ya (the package manager).
