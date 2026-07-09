@@ -4,7 +4,7 @@ Priority: optional
 Maintainer: Dario Griffo <dariogriffo@gmail.com>
 Homepage: https://github.com/sxyazi/yazi
 Package: yazi
-Version: YAZI_VERSION-BUILD_VERSION+DIST
+Version: YAZI_VERSION-BUILD_VERSION~DIST
 Architecture: SUPPORTED_ARCHITECTURES
 Suggests: ffmpeg, 7zip, jq, poppler-utils, fd-find, ripgrep, fzf, zoxide, imagemagick, file
 Description: a terminal file manager written in Rust, based on non-blocking async I/O
