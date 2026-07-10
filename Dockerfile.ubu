@@ -16,6 +16,8 @@ COPY ${YAZI_RELEASE}/LICENSE /output/usr/bin/
 RUN mkdir -p /output/DEBIAN
 
 COPY output/DEBIAN/control /output/DEBIAN/
+COPY output/DEBIAN/postinst /output/DEBIAN/postinst
+RUN chmod 755 /output/DEBIAN/postinst
 COPY output/copyright /output/usr/share/doc/yazi/
 COPY output/changelog.Debian /output/usr/share/doc/yazi/
 COPY output/README.md /output/usr/share/doc/yazi/
