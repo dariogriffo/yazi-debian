@@ -20,7 +20,7 @@ This repository contains build scripts to produce the _unofficial_ Debian packag
 (.deb) for [yazi](https://github.com/sxyazi/yazi/) hosted at [deb.griffo.io](https://deb.griffo.io)
 
 <p align="center">
-⭐⭐⭐ Love using yazi on Debian? Show your support by starring this repo or [subscribing](https://buy.stripe.com/aFa28q8hr0lRdlm4a2enS01) — access to this repository requires a yearly subscription. ⭐⭐⭐
+⭐⭐⭐ Love using yazi on Debian? Show your support by starring this repo or [subscribing](https://buy.stripe.com/aFa28q8hr0lRdlm4a2enS01) — from 1 October 2026, apt access requires a yearly subscription. ⭐⭐⭐
 </p>
 
 Currently supported debian distros are:
@@ -37,6 +37,11 @@ install on Debian. If you're looking for the yazi source code, see
 📖 **Step-by-step install guide:** [Debian](https://deb.griffo.io/install-latest-yazi-in-debian.html) · [Ubuntu](https://deb.griffo.io/install-latest-yazi-in-ubuntu.html)
 
 ### The Debian way
+
+> ⚠️ **From 1 October 2026, apt access requires a yearly subscription**
+> ([deb.griffo.io](https://deb.griffo.io)). To use this tool for free, download
+> the .deb from the [Releases](https://github.com/dariogriffo/yazi-debian/releases) page
+> and install it manually (see below).
 
 ```sh
 sudo install -d -m 0755 /etc/apt/keyrings
