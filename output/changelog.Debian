@@ -1,4 +1,4 @@
-yazi (FULL_VERSION) DIST; urgency=low
+yazi (FULL_VERSION) stable; urgency=low
 
   This is a quick fix release that addresses the issue where, under SSH, terminal response sequences are not completely consumed and are leaked to the screen.
   
